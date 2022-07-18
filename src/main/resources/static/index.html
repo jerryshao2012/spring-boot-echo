@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Getting Started: Echo HTTP Request</title>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script async src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+    <link rel="stylesheet" href="/css/echo.css">
+</head>
+<body>
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Getting Started: Echo HTTP Request</div>
+        </ons-toolbar>
+        <ons-button modifier="large" onclick="location.href='/echo'">Access /echo</ons-button>
+        <ons-button modifier="large" onclick="location.href='/echo?product=1111&category=dummy'">Access /echo?product=1111&category=dummy</ons-button>
+        <ons-button modifier="large" onclick="location.href='/echo?name=jerry'">Access /echo?name=jerry</ons-button>
+        <ons-button modifier="large" onclick="location.href='/echo/1/cars'">Access /echo/1/cars</ons-button>
+        <ons-button modifier="large" onclick="location.href='/echoJson'">Access /echoJson</ons-button>
+    </ons-page>
+</body>
+</html>

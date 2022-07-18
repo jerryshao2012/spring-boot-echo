@@ -1,0 +1,8 @@
+.list-item__subtitle:hover {
+    background-color: darkblue;
+    color: white;
+}
+.button--large {
+    width: 95%;
+    margin: 0.2rem auto;
+}

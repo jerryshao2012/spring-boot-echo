@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Getting Started: Echo HTTP Request</title>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script async src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+    <link rel="stylesheet" href="/css/echo.css">
+    <script async src="/js/clipboard.min.js"></script>
+</head>
+<body>
+    <ons-page>
+        <ons-toolbar>
+            <button class="toolbar-button" onclick="location.href='/'">
+                <i class="fa fa-home" style="color:gray;"></i>
+            </button>
+            <div class="center">Echo HTTP Request</div>
+        </ons-toolbar>
+        <ons-list>
+            <ons-list-header>path</ons-list-header>
+            <ons-list-item>
+                <div class="center">
+                    <span class="list-item__subtitle" th:text="${path}">path</span>
+                </div>
+            </ons-list-item>
+
+            <ons-list-header>protocol</ons-list-header>
+            <ons-list-item>
+                <div class="center">
+                    <span class="list-item__subtitle" th:text="${protocol}">protocol</span>
+                </div>
+            </ons-list-item>
+
+            <ons-list-header>method</ons-list-header>
+            <ons-list-item>
+                <div class="center">
+                    <span class="list-item__subtitle" th:text="${method}">method</span>
+                </div>
+            </ons-list-item>
+
+            <ons-list-header th:if="${headers}">headers</ons-list-header>
+            <ons-list-item th:each="header: ${headers}">
+                <div class="center">
+                    <span class="list-item__title" th:text="${header.key}">header.key</span><span class="list-item__subtitle" th:text="${header.value}">header.value</span>
+                </div>
+            </ons-list-item>
+
+            <ons-list-header th:if="${cookies}">cookies</ons-list-header>
+            <ons-list-item th:each="cookie: ${cookies}">
+                <div class="center">
+                    <span class="list-item__subtitle" th:text="${cookie}">cookie</span>
+                </div>
+            </ons-list-item>
+
+            <ons-list-header th:if="!${parameters.isEmpty()}">parameters</ons-list-header>
+            <ons-list-item th:each="parameter: ${parameters}">
+                <div class="center">
+                    <span class="list-item__subtitle" th:text="${parameter.key}+'='+${parameter.value}">parameter.key=header.value</span>
+                </div>
+            </ons-list-item>
+
+            <ons-list-header th:if="${body}">body</ons-list-header>
+            <ons-list-item>
+                <div class="center">
+                    <span class="list-item__subtitle" th:text="${body}">body</span>
+                </div>
+            </ons-list-item>
+        </ons-list>
+    </ons-page>
+    <script type="text/javascript">
+        new ClipboardJS('.list-item__subtitle', {
+            text: function (trigger) {
+                return trigger.textContent;
+            },
+        });
+    </script>
+</body>
+</html>
