@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sprint-boot-echo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sprint-boot-echo-app
+  template:
+    metadata:
+      labels:
+        app: sprint-boot-echo-app
+    spec:
+      containers:
+        - name: sprint-boot-echo
+          image: sprint-boot-echo-image:latest
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
