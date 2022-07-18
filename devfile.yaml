@@ -3,7 +3,7 @@ metadata:
   name: spring-boot-echo
   version: 1.1.0
   attributes:
-    alpha.dockerimage-port: 8080
+    alpha.dockerimage-port: 8081
   displayName: Sprint Boot Echo
   description: Sprint Boot Echo using Maven
   tags: ["Java", "Spring"]
@@ -29,7 +29,7 @@ components:
       deployment/cpuRequest: 10m
       deployment/memoryLimit: 300Mi
       deployment/memoryRequest: 180Mi
-      deployment/container-port: 8080
+      deployment/container-port: 8081
     kubernetes:
       uri: outerloop-deploy.yaml
 commands:

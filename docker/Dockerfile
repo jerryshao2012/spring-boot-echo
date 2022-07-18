@@ -24,4 +24,4 @@ FROM openjdk:18-jdk
 COPY --from=0 /build/target/echo-0.0.1-SNAPSHOT.jar /app/target/echo-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8081
-ENTRYPOINT [ "java", "-jar", "/app/target/echo-0.0.1-SNAPSHOT.jar", "--server.port=8080" ]
+ENTRYPOINT [ "java", "-jar", "/app/target/echo-0.0.1-SNAPSHOT.jar", "--server.port=8081" ]
