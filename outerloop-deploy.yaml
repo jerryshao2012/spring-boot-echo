@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: sprint-boot-echo
-          image: sprint-boot-echo-image:latest
+          image: sprint-boot-echo:latest
           ports:
             - name: http
               containerPort: 8081

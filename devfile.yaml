@@ -17,7 +17,7 @@ parent:
 components:
   - name: outerloop-build
     image:
-      imageName: sprint-boot-echo-image:latest
+      imageName: sprint-boot-echo:latest
       dockerfile:
         uri: docker/Dockerfile
         buildContext: .
