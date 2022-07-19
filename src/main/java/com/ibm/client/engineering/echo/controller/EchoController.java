@@ -39,26 +39,26 @@ public class EchoController {
 
     // ----------------------------------------------------- Private Methods
 
-    private static String cookieToString(final Cookie cookie)        {
+    private static String cookieToString(final Cookie cookie) {
         final StringBuffer result = new StringBuffer();
 
         result.append(cookie.getName() + "=" + cookie.getValue());
 
         result.append("; Max-Age=" + cookie.getMaxAge());
 
-        if (cookie.getDomain() != null)     {
+        if (cookie.getDomain() != null) {
             result.append("; Domain=" + cookie.getDomain());
         }
 
-        if (cookie.getPath() != null)       {
+        if (cookie.getPath() != null) {
             result.append("; Path=" + cookie.getPath());
         }
 
-        if (cookie.getSecure())     {
+        if (cookie.getSecure()) {
             result.append("; Secure");
         }
 
-        if (cookie.isHttpOnly())   {
+        if (cookie.isHttpOnly()) {
             result.append("; HttpOnly");
         }
 
@@ -74,7 +74,7 @@ public class EchoController {
             RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS,
             RequestMethod.HEAD, RequestMethod.PATCH})
     @ResponseStatus(NOT_FOUND)
-    public String echo(final @RequestBody(required = false) byte[] rawBody,final Model model) {
+    public String echo(final @RequestBody(required = false) byte[] rawBody, final Model model) {
         model.addAttribute(JsonPayload.PATH, request.getServletPath());
         logger.info("path: {}", request.getServletPath());
 
@@ -84,7 +84,7 @@ public class EchoController {
         model.addAttribute(JsonPayload.METHOD, request.getMethod());
         logger.info("method: {}", request.getMethod());
 
-        final Map<String, String> headers  = Collections.list(request.getHeaderNames()).stream()
+        final Map<String, String> headers = Collections.list(request.getHeaderNames()).stream()
                 .collect(Collectors.toMap(Function.identity(), request::getHeader));
         model.addAttribute(JsonPayload.HEADERS, headers);
         logger.info("headers: {}", headers);
@@ -92,7 +92,7 @@ public class EchoController {
         final String[] cookies = request.getCookies() == null ? null :
                 Arrays.stream(request.getCookies()).map(EchoController::cookieToString).toArray(String[]::new);
         model.addAttribute(JsonPayload.COOKIES, cookies);
-        logger.info("cookies: {}", cookies);
+        logger.info("cookies: {}", (Object[]) cookies);
 
         final Map<String, String> parameters = request.getParameterMap().entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> String.join("; ", e.getValue())));
@@ -121,7 +121,7 @@ public class EchoController {
         response.set(JsonPayload.METHOD, request.getMethod());
         logger.info("method: {}", request.getMethod());
 
-        final Map<String, String> headers  = Collections.list(request.getHeaderNames()).stream()
+        final Map<String, String> headers = Collections.list(request.getHeaderNames()).stream()
                 .collect(Collectors.toMap(Function.identity(), request::getHeader));
         response.set(JsonPayload.HEADERS, headers);
         logger.info("headers: {}", headers);
@@ -129,7 +129,7 @@ public class EchoController {
         final String[] cookies = request.getCookies() == null ? null :
                 Arrays.stream(request.getCookies()).map(EchoController::cookieToString).toArray(String[]::new);
         response.set(JsonPayload.COOKIES, cookies);
-        logger.info("cookies: {}", cookies);
+        logger.info("cookies: {}", (Object[]) cookies);
 
         final Map<String, String> parameters = request.getParameterMap().entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> String.join("; ", e.getValue())));
