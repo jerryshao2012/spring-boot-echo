@@ -10,14 +10,14 @@ This is a small application that echoes back the HTTP request in HTML or JSON:
 ## Steps to run & test the application:
 1. Clone the repository:
 
-   $ git clone https://github.com/jerryshao2012/spring-echo-example.git
+   $ git clone https://github.com/jerryshao2012/spring-boot-echo.git
 2. Run the application the gradle command
 
    $ cd spring-boot-echo
 
    $ gradlew bootRun
 
-    or $ mvn spring-boot:run
+   or $ mvn spring-boot:run
 3. Test the application: try it using your browser, REST client, PostMan:
 * http://localhost:8081
 * http://localhost:8081/echo
@@ -45,6 +45,8 @@ In Spring's approach to building web sites, HTTP requests are handled by a contr
 following example, `EchoController` handles GET requests for `/echo` by returning
 the name of a [View](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/View.html) (in this case, `echo`). A `View` is responsible for
 rendering the HTML content.
+
+### Step 3: Use OpenShift Action to deploy
 
 ### Reference Documentation
 For further reference, please consider the following sections:
