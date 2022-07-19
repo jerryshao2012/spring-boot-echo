@@ -26,6 +26,8 @@ This is a small application that echoes back the HTTP request in HTML or JSON:
 * http://localhost:8081/echo/1/cars
 * http://localhost:8081/echoJson
 
+Note: Click HTML response item in highlight will copy content into clipboard
+
 ## Steps to build the application in about 15 minutes:
 ### Before you start
 * A favorite text editor or IDE
@@ -46,7 +48,8 @@ following example, `EchoController` handles GET requests for `/echo` by returnin
 the name of a [View](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/View.html) (in this case, `echo`). A `View` is responsible for
 rendering the HTML content.
 
-### Step 3: Use OpenShift Action to deploy
+### Step 3: Use OpenShift Action to deploy to AWS OpenShift
+Before you start, please prepare your IBM Cloud account. (TODO:)
 
 ### Reference Documentation
 For further reference, please consider the following sections:
