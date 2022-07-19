@@ -15,7 +15,7 @@ This is a small application that echoes back the HTTP request in HTML or JSON:
 
    $ cd spring-boot-echo
 
-   $ gradlew bootRun
+   $ gradle bootRun
 
    or $ mvn spring-boot:run
 3. Test the application: try it using your browser, REST client, PostMan:
@@ -90,11 +90,11 @@ For further reference, please consider the following sections:
 
 * [Official Gradle documentation](https://docs.gradle.org)
 * [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.7.1/gradle-plugin/reference/html/)
-  * Build the JAR file by using **./gradlew build** and then run the JAR file, as follows:
+  * Build the JAR file by using **./gradle build** and then run the JAR file, as follows:
   ```
     java -jar build/libs/echo-0.0.1-SNAPSHOT
   ```
-  * Note for Maven: build the JAR file with **./mvnw clean** package and then run the JAR file, as follows:
+  * Note for Maven: build the JAR file with **./mvn clean** package and then run the JAR file, as follows:
   ```
     java -jar target/echo-0.0.1-SNAPSHOT
   ```
