@@ -27,6 +27,10 @@ This is a small application that echoes back the HTTP request in HTML or JSON:
 * http://localhost:8081/echoJson
 
 Note: Click HTML response item in highlight will copy content into clipboard
+Notes for Docker:
+* You can use **docker build -t springt-boot-echo .** to build a Docker Image
+* Use **docker images** to view images
+* Use **docker run -p 8082:8081 spring-boot-echo** to run Docker Image in a Container using port 8082
 
 ## Steps to build the application in about 15 minutes:
 ### Before you start
