@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ibm.client.engineering</groupId>
 	<artifactId>echo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.2</version>
 	<name>echo</name>
 	<description>Echo sample project for Spring Boot</description>
 	<properties>
@@ -24,6 +24,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
 		<dependency>
