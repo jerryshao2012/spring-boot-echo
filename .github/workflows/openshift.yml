@@ -99,8 +99,7 @@ jobs:
           const GHCR = "ghcr.io";
           if (`${{ env.IMAGE_REGISTRY }}`.startsWith(GHCR)) {
             core.info(`Image registry is ${GHCR} - no registry password required`);
-          }
-          else {
+          } else {
             core.info("A registry password is required");
             secrets["IMAGE_REGISTRY_PASSWORD"] = `${{ secrets.IMAGE_REGISTRY_PASSWORD }}`;
           }
@@ -120,8 +119,7 @@ jobs:
               "GitHub UI: https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository \n" +
               "GitHub CLI: https://cli.github.com/manual/gh_secret_set \n" +
               "Also, refer to https://github.com/redhat-actions/oc-login#getting-started-with-the-action-or-see-example");
-          }
-          else {
+          } else {
             core.info(`✅ All the required secrets are set`);
           }
 
@@ -196,6 +194,13 @@ jobs:
         SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
       run: |
         [[ -n ${{ env.ROUTE }} ]] || (echo "Determining application route failed in previous step"; exit 1)
+        echo "Extract the SSL Cert Secret"
+        openshift_ingress_cluster_tls=$(oc get secrets -n openshift-ingress -o json | jq -r '.items[] | select(.type | test("kubernetes.io/tls")).metadata.name' | grep -v 'router')
+        echo "Save the secret in a temporary directory"
+        oc extract secret/$openshift_ingress_cluster_tls --to=/tmp -n openshift-ingress
+        oc delete route spring-boot-echo
+        echo "Create Edge Route"
+        oc create route edge --service ${{ env.APP_NAME }} --key /tmp/tls.key --cert /tmp/tls.crt
         echo
         echo "======================== Your application is available at: ========================"
         echo ${{ env.ROUTE }}
