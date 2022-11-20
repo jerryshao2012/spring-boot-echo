@@ -203,7 +203,7 @@ jobs:
         oc create route edge --service ${{ env.APP_NAME }} --key /tmp/tls.key --cert /tmp/tls.crt
         echo
         echo "======================== Your application is available at: ========================"
-        echo ${{ env.ROUTE }}
+        echo ${{ env.ROUTE }} | sed 's/http:/https:/g'
         echo "==================================================================================="
         echo
         echo "Your app can be taken down with: \"oc delete all --selector='${{ env.SELECTOR }}'\""
