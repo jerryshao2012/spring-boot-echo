@@ -3,13 +3,13 @@
 #
 # Build the image with:
 #
-# docker build -f Dockerfile -t springboot/spring-boot-echo .
+# docker build -f Dockerfile -t spring-boot-echo .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8081:8081 springboot/spring-boot-echo
+# docker run -i --rm -p 8081:8081 spring-boot-echo
 ####
-FROM gradle:7.5-jdk18-alpine AS build
+FROM gradle:7.5-jdk18 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle build --no-daemon
