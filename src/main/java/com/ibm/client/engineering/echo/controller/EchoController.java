@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
@@ -133,7 +132,7 @@ public class EchoController {
         response.set(JsonPayload.PARAMETERS, parameters);
         logger.info("parameters: {}", parameters);
 
-        final String body = rawBody != null ? Base64.getEncoder().encodeToString(rawBody) : null;
+        final String body = rawBody != null ? new String(rawBody) : null;
         response.set(JsonPayload.BODY, body);
         logger.info("body: {}", body);
 
