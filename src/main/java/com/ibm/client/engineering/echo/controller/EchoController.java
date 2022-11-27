@@ -96,7 +96,7 @@ public class EchoController {
         model.addAttribute(JsonPayload.PARAMETERS, parameters);
         logger.info("parameters: {}", parameters);
 
-        final String body = rawBody != null ? Base64.getEncoder().encodeToString(rawBody) : null;
+        final String body = rawBody != null ? new String(rawBody) : null;
         model.addAttribute(JsonPayload.BODY, body);
         logger.info("body: {}", body);
 
