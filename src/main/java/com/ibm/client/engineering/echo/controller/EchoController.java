@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
+@CrossOrigin(allowCredentials = "true",
+        originPatterns = {"https://*.cp2022-60b41835e65227550a2031aa4f2061fc-0000.ca-tor.containers.appdomain.cloud"})
 public class EchoController {
 
     // ----------------------------------------------------- Instance Variables
@@ -36,18 +38,18 @@ public class EchoController {
     // ----------------------------------------------------- Private Methods
 
     private static String cookieToString(final Cookie cookie) {
-        final StringBuffer result = new StringBuffer();
+        final StringBuilder result = new StringBuilder();
 
-        result.append(cookie.getName() + "=" + cookie.getValue());
+        result.append(cookie.getName()).append("=").append(cookie.getValue());
 
-        result.append("; Max-Age=" + cookie.getMaxAge());
+        result.append("; Max-Age=").append(cookie.getMaxAge());
 
         if (cookie.getDomain() != null) {
-            result.append("; Domain=" + cookie.getDomain());
+            result.append("; Domain=").append(cookie.getDomain());
         }
 
         if (cookie.getPath() != null) {
-            result.append("; Path=" + cookie.getPath());
+            result.append("; Path=").append(cookie.getPath());
         }
 
         if (cookie.getSecure()) {

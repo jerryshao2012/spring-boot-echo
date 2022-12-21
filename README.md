@@ -89,6 +89,50 @@ rendering the HTML content.
 4. In github repository **Settings**, define **OPENSHIFT_SERVER** and **OPENSHIFT_TOKEN** for **Actions**
 5. Commit OpenShit workflow & it is good to go!
 
+#### CI/CD using Argo CD
+
+1. In GitLab, create **a blank project** under [**cp4a-credit**](https://ca-tor.git.cloud.ibm.com/cp4a-credit) group
+2. Setup Webhook
+    1. Go to **Settings** -> **Webhooks**
+    2. Enter [**https://robo-gitops-cron-pipelines.cp2022-60b41835e65227550a2031aa4f2061fc-0000.ca-tor.containers.appdomain.cloud**](https://robo-gitops-cron-pipelines.cp2022-60b41835e65227550a2031aa4f2061fc-0000.ca-tor.containers.appdomain.cloud/) in the URL field.
+    3. Enter **garage-builder-secret** as the **Secret token**
+    4. Make sure the **Push events** trigger is checked.
+    5. Uncheck **Enable SSL Verification** option and click **Add Webhook**.
+3. Create a folder under [cp4a-credit/Deployments](https://ca-tor.git.cloud.ibm.com/cp4a-credit/deployments), the same as the project name from step #1. Target branch as **main**.
+4. Create a **deployment.yaml** file and save it under the folder created in step #3 copy content from [https://ca-tor.git.cloud.ibm.com/cp4a-credit/deployments/-/blob/main/echoapi/deployment.yaml](https://ca-tor.git.cloud.ibm.com/cp4a-credit/deployments/-/blob/main/echoapi/deployment.yaml). Update app pod, service, router names
+5. Commit and Push your changes for [cp4a-credit/deployments](https://ca-tor.git.cloud.ibm.com/cp4a-credit/deployments) project.
+6. Clone the project you created from step #1, and add your code to the project
+7. Add pipeline-run.yaml file to your project similar to [pipeline-run.yaml Example](https://ca-tor.git.cloud.ibm.com/cp4a-credit/graphqlopenapi/-/blob/main/pipeline-run.yaml) and making changes according to your project name is not enough. Must update **deployment-repo** to value: “[https://ca-tor.git.cloud.ibm.com/cp4a-credit/deployments.git](https://ca-tor.git.cloud.ibm.com/cp4a-credit/deployments.git)"
+8. Commit and push changes. you may have to config GitLab in your local machine through steps in GitLab for **IBM SSH key pair for GitLab**
+9. Upon commit, it should trigger the pipeline under [cron-pipelines](https://console-openshift-console.cp2022-60b41835e65227550a2031aa4f2061fc-0000.ca-tor.containers.appdomain.cloud/pipelines/ns/cron-pipelines)
+10. Once the pipeline is completed successfully, it will create a new image and also update deployment.yaml file with a new image tag.
+11. Create Argo CD Project
+    1. Go to [Argo CD](https://gitops.cp22.robobob.ca/applications) and click **Login with openshift**
+    2. Click **New App** and enter your project name as the application name.
+    3. Select **cron** under Project Name.
+    4. Keep Sync Policy **Manual**.
+    5. For the Repository URL under the Source section, enter [**https://ca-tor.git.cloud.ibm.com/cp4a-credit/deployments.git**](https://ca-tor.git.cloud.ibm.com/cp4a-credit/deployments.git)
+    6. Keep revision as **HEAD**
+    7. Under path, enter the folder name you created in the step private channel. (use application name)
+    8. Select cluster URL as [**https://kubernetes.default.svc**](https://kubernetes.default.svc/)
+    9. Enter **cron** under the namespace
+    10. Click **Create** on the top.
+    11. Once you see the newly created project, click **Sync** to deploy your changes.
+12. Click route → Details. In LIVE MANIFEST you can find exposed public API host’s name
+
+#### Test Enabled CORS
+
+In browser console:
+```javascript
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+xhr.addEventListener("readystatechange", function() {
+    if(this.readyState === 4) console.log(this.responseText);
+});
+xhr.open("GET", "https://echo-api-cron.cp2022-60b41835e65227550a2031aa4f2061fc-0000.ca-tor.containers.appdomain.cloud/echoJson");
+xhr.send();
+```
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 
